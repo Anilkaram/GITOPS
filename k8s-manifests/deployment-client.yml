@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind : Deployment
+metadata: 
+  name: client-deployment
+spec:
+  selector: 
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      initContainers:
+      - name: wait-for-server
+        image: busybox:1.35
+        command: ['sh', '-c']
+        args:
+        - |
+          echo "Waiting for Server to be ready..."
+          until nc -z server-service 80; do
+            echo "Server not ready, waiting..."
+            sleep 5
+          done
+          echo "Server is ready!"
+      containers:
+      - name: client
+        image: anildoc143/travel_ease_website_v6:client
+        ports:
+        - containerPort: 80
+        env:
+        - name: NODE_ENV
+          valueFrom: 
+            configMapKeyRef:
+              name: client-config
+              key: NODE_ENV
+        - name: REACT_APP_API_URL
+          valueFrom:
+            configMapKeyRef:
+              name: client-config
+              key: REACT_APP_API_URL
+        - name: API_BACKEND
+          valueFrom:
+            configMapKeyRef:
+              name: client-config
+              key: API_BACKEND
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 10
+    #  imagePullSecrets:
+    #  - name: ecr-cred
+      

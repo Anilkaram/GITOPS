@@ -25,7 +25,7 @@ spec:
           echo "MongoDB is ready!"
       containers:
       - name: server
-        image: anildoc143/travel_ease_website_v5:server
+        image: anildoc143/travel_ease_website_v6:server
         ports:
         - containerPort: 5000
         env:

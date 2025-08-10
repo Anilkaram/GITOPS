@@ -32,7 +32,7 @@ spec:
         - name: MONGO_INITDB_DATABASE
           valueFrom: 
             configMapKeyRef:
-              name: mongo-conf
+              name: mongo-config
               key: "travelease"
         volumeMounts:
         - name: mongo-storage

@@ -18,7 +18,7 @@ spec:
         args:
         - |
           echo "Waiting for Server to be ready..."
-          until nc -z server-service 5000; do
+          until nc -z server-service 80; do
             echo "Server not ready, waiting..."
             sleep 5
           done

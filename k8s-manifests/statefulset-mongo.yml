@@ -33,7 +33,7 @@ spec:
           valueFrom: 
             configMapKeyRef:
               name: mongo-config
-              key: "travelease"
+              key: MONGO_INITDB_DATABASE
         volumeMounts:
         - name: mongo-storage
           mountPath: /data/db

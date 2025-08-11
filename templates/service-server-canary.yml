@@ -4,7 +4,7 @@ metadata:
   name: canary-server-service
 spec:
   selector:
-    app: {{ .Values.server.labels.app }}
+    app: {{ .Values.canary.server.labels.app }}
   type : {{ .Values.server.type}}
   ports:
     - port: {{ .Values.server.ports.port }}

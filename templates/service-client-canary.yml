@@ -4,7 +4,7 @@ metadata:
   name: canary-client-service
 spec:
   selector:
-    app: {{ .Values.client.labels.app }}
+    app: {{ .Values.canary.client.labels.app }}
   type: ClusterIP
   ports:
     - port: {{ .Values.client.service.port }}

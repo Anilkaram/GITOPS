@@ -82,4 +82,6 @@ mongodb:
     storage: 2Gi
   
   canary:
+    labels:
+      app: client-canary
   

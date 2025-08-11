@@ -82,17 +82,21 @@ mongodb:
     storageClassName: "standard"
     storage: 2Gi
   
-  canary:
-    client:
-      labels:
-        app: client-canary
+canary:
+  client:
+    labels:
+      app: client-canary
+  image:
+    repository: anildoc143/travel_ease_website_v6
+    tag: client
+    
+  server:
+    labels:
+      app: server-canary
     image:
       repository: anildoc143/travel_ease_website_v6
       tag: client
-    
-    server:
-      labels:
-        app: server-canary
-      image:
-        repository: anildoc143/travel_ease_website_v6
-        tag: client
+  
+  ingress:
+    enable: true
+    trafficWeight: 10

@@ -32,6 +32,8 @@ server:
     app: server
   type: ClusterIP
   containerPort: 5000
+  env:
+    NODE_ENV: production
   resources:
     requests:
       cpu: 100m

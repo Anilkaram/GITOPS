@@ -1,0 +1,79 @@
+client:
+  image:
+    repository: anildoc143/travel_ease_website_v6
+    tag: client
+  containerPort: 80
+  service:
+    port: 80
+  env:
+    NODE_ENV: production
+    REACT_APP_API_URL: http://server-service:80
+    API_BACKEND: server-service:80
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 256m
+      memory: 256Mi
+  readinessProbe:
+    initialDelaySeconds: 10
+    periodSeconds: 5
+  livenessProbe:
+    initialDelaySeconds: 15
+    periodSeconds: 10
+
+server:
+  serviceName: server-service
+  image:
+    repository: anildoc143/travel_ease_website_v6
+    tag: server
+  labels:
+    app: server
+  type: ClusterIP
+  containerPort: 5000
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 256m
+      memory: 256Mi
+  ports:
+    port: 80
+    targetPort: 5000
+  secret:
+    MONGO_URI: bW9uZ29kYjovL2FkbWluOmFkbWluQG1vbmdvOjI3MDE3L3RyYXZlbGVhc2U/YXV0aFNvdXJjZT1hZG1pbg==
+    JWT_SECRET: VHJhdmVsRWFzZTIwMjVTZWNyZXRLZXlGb3JKV1RUb2tlbnM5ODc2NTQzMjE=
+
+mongodb:
+  replicaCount: 1
+  initdbDatabase: travelease
+  image:
+    repository: mongo
+    tag: 5.0
+  containerPort: 27017
+  type : ClusterIP
+  service:
+    port: 27017
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 256m
+      memory: 256Mi
+  persistence:
+    enabled: true
+    storageClass: "gp2"
+    accessModes:
+      - ReadWriteOnce
+    size: 2Gi
+  secret:
+    username: YWRtaW4=
+    password: YWRtaW4=
+  volumeClaimTemplates:
+    name: mongo-storage
+    storageClassName: "gp2"
+    storage: 2Gi
+    

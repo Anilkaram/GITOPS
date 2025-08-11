@@ -37,12 +37,12 @@ spec:
         - name: MONGO_URI
           valueFrom:
             secretKeyRef:
-              name: "{{ .Release.Name }}-server-config"
+              name: "{{ .Release.Name }}-server-secret"
               key: MONGO_URI
         - name: JWT_SECRET
           valueFrom:
             secretKeyRef:
-              name: "{{ .Release.Name }}-server-config"
+              name: "{{ .Release.Name }}-server-secret"
               key: JWT_SECRET
         resources:
           requests:

@@ -76,6 +76,6 @@ mongodb:
     password: YWRtaW4=
   volumeClaimTemplates:
     name: mongo-storage
-    storageClassName: "gp2"
+    storageClassName: "standard"
     storage: 2Gi
     

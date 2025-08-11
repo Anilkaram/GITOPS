@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: "{{ .Release.Name }}-server-config"
 data:
-  NODE_ENV: "{{ .Values.server.env.NODE_ENV | quote }}"
+  NODE_ENV: "{{ .Values.server.env.NODE_ENV }}"

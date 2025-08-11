@@ -31,7 +31,7 @@ server:
     repository: anildoc143/travel_ease_website_v6
     tag: server
   labels:
-    app: canary-server
+    app: server
   type: ClusterIP
   containerPort: 5000
   env:

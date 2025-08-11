@@ -4,8 +4,8 @@ metadata:
   name: client-service
 spec:
   selector:
-    app: client
-  type: ClusterIP
+    app: {{ .Values.client.labels.app }}
+  type: {{ .Values.client.type }}
   ports:
     - port: {{ .Values.client.service.port }}
       targetPort: {{ .Values.client.containerPort }}

@@ -86,9 +86,9 @@ canary:
   client:
     labels:
       app: client-canary
-  image:
-    repository: anildoc143/travel_ease_website_v6
-    tag: client
+    image:
+      repository: anildoc143/travel_ease_website_v6
+      tag: client
     
   server:
     labels:

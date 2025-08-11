@@ -7,11 +7,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: {{ .Values.canary.labels.app }}
+      app: {{ .Values.canary.client.labels.app }}
   template:
     metadata:
       labels:
-        app: {{ .Values.canary.labels.app }}
+        app: {{ .Values.canary.client.labels.app }}
     spec:
       initContainers:
         - name: wait-for-server

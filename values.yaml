@@ -2,6 +2,8 @@ client:
   image:
     repository: anildoc143/travel_ease_website_v6
     tag: client
+  labels:
+    app: client
   containerPort: 80
   service:
     port: 80
@@ -78,4 +80,6 @@ mongodb:
     name: mongo-storage
     storageClassName: "standard"
     storage: 2Gi
-    
+  
+  canary:
+  

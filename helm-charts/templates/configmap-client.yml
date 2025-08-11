@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ .Release.Name}}-client-config"
+data:
+  NODE_ENV: {{ .Values.client.env.NODE_ENV | quote }}
+  REACT_APP_API_URL: {{ .Values.client.env.REACT_APP_API_URL | quote }}
+  API_BACKEND: {{ .Values.client.env.API_BACKEND | quote }}

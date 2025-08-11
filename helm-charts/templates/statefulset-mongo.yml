@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: "{{  .Release.Name  }}-mongo-statefulset"
+spec:
+  replicas: {{ .Values.mongodb.replicaCount }}
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+      - name: mongo
+        image: "{{ .Values.mongodb.image.repository }}:{{ .Values.mongodb.image.tag }}"
+        ports:
+          - containerPort: {{ .Values.mongodb.containerPort }}
+        env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: "{{ .Release.Name }}-mongo-secret"
+                key: username
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: "{{ .Release.Name }}-mongo-secret"
+                key: password
+          - name: MONGO_INITDB_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: "{{ .Release.Name }}-mongo-config"
+                key: MONGO_INITDB_DATABASE
+        volumeMounts:
+          - name: mongo-storage
+            mountPath: /data/db
+        resources:
+          requests:
+            cpu: {{ .Values.mongodb.resources.requests.cpu }}
+            memory: {{ .Values.mongodb.resources.requests.memory }}
+          limits:
+            cpu: {{ .Values.mongodb.resources.limits.cpu }}
+            memory: {{ .Values.mongodb.resources.limits.memory }}
+  volumeClaimTemplates:
+  - metadata:
+      name: {{ .Values.mongodb.volumeClaimTemplates.name }}
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: {{ .Values.mongodb.volumeClaimTemplates.storageClassName | quote }}
+      resources:
+        requests:
+          storage: {{ .Values.mongodb.volumeClaimTemplates.storage | quote }}

@@ -48,7 +48,7 @@ spec:
       name: {{ .Values.mongodb.volumeClaimTemplates.name }}
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: {{ .Values.mongodb.volumeClaimTemplates.storageClassName | quote }}
+      storageClassName: {{ .Values.mongodb.volumeClaimTemplates.storageClassName }}
       resources:
         requests:
-          storage: {{ .Values.mongodb.volumeClaimTemplates.storage | quote }}
+          storage: {{ .Values.mongodb.volumeClaimTemplates.storage }}

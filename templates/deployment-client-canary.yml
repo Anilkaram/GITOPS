@@ -27,7 +27,7 @@ spec:
               echo "Server is ready!"
       containers:
         - name: client
-          image: "{{ .Values.client.image.repository }}:{{ .Values.client.image.tag }}"
+          image: "{{ .Values.canary.client.image.repository }}:{{ .Values.canary.client.image.tag }}"
           ports:
             - containerPort: {{ .Values.client.containerPort }}
           env:

@@ -3,16 +3,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: client-deployment
-  labels:
-    app: client
 spec:
   selector:
     matchLabels:
-      app: client
+      app: {{ .Values.client.labels.app }}
   template:
     metadata:
       labels:
-        app: client
+        app: {{ .Values.client.labels.app }}
     spec:
       initContainers:
         - name: wait-for-server

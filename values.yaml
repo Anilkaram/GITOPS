@@ -1,6 +1,6 @@
 client:
   image:
-    repository: anildoc143/travel_ease_website_v6
+    repository: anildoc143/travel_ease_website_v5
     tag: client
   labels:
     app: client
@@ -29,7 +29,7 @@ client:
 server:
   serviceName: server-service
   image:
-    repository: anildoc143/travel_ease_website_v6
+    repository: anildoc143/travel_ease_website_v5
     tag: server
   labels:
     app: server
@@ -86,6 +86,13 @@ mongodb:
     client:
       labels:
         app: client-canary
+    image:
+      repository: anildoc143/travel_ease_website_v6
+      tag: client
+    
     server:
       labels:
         app: server-canary
+      image:
+        repository: anildoc143/travel_ease_website_v6
+        tag: client

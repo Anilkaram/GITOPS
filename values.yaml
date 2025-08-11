@@ -5,6 +5,7 @@ client:
   labels:
     app: client
   containerPort: 80
+  type: ClusterIP
   service:
     port: 80
   env:

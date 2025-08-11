@@ -79,7 +79,7 @@ mongodb:
     password: YWRtaW4=
   volumeClaimTemplates:
     name: mongo-storage
-    storageClassName: "standard"
+    storageClassName: "gp2"
     storage: 2Gi
   
 canary:

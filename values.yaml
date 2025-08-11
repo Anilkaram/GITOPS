@@ -98,5 +98,5 @@ canary:
       tag: client
   
   ingress:
-    enable: true
+    enable: false
     trafficWeight: 10
